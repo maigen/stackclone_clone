@@ -1,0 +1,21 @@
+<%= content_for(:navigation) do %>
+  <%= link_to "All Questions", questions_path %>
+<% end %>
+
+<%= content_for (:header) do %>
+  <%= @question.content %><br/>
+  <span class="posted_by">Posted by: <%= @question.user.name %> at <%= @question.created_at.strftime("%I:%M %P on %B %d") %></span>
+<% end %>
+
+
+
+<ul>
+  <div id="answer_list">
+    <%= render( @question.answers ) %>
+  </div>
+</ul>
+<% if user_signed_in? %>
+  <p class="new_answer"><%= link_to "New Answer", new_question_answer_path(@question), id: "answer_link", remote: true %></p>
+<% else %>
+  <p class="new_answer"><%= link_to "New Answer", new_question_answer_path(@question), id: "answer_link" %></p>
+<% end %>

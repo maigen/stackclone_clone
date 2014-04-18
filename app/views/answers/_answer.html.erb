@@ -1,0 +1,14 @@
+<li>
+ <p class="answer"> <%= answer.content %></p>
+  <span class="posted_by">Posted by: <%= answer.user.name %> at <%= answer.created_at.strftime("%I:%M %P on %B %d") %></span>
+
+<% if user_signed_in? %>
+  <span class="vote_text">Votes: <%= answer.vote_count %></span>
+      <span class="votes">[ <%= link_to("+", votes_path(vote: { :answer_id => answer.id, :value => 1, :user_id => current_user.id }), :method => 'post') %>
+      <%= link_to("-", votes_path(vote: { :answer_id => answer.id, :value => -1, :user_id => current_user.id }), :method => 'post') %> ]</span>
+<% end %>
+
+
+
+
+</li>
